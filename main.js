@@ -3,8 +3,7 @@
 // Output is either "win", "lose", or "draw"
 // Win, lose, and draw conditions based on rock, paper, scissors rules
 
-// User inputs rock, paper, or scissors
-
+// Computer randomly choses rock, paper, or scissors
 function getComputerChoice()
 {
     const min = 0;
@@ -12,10 +11,14 @@ function getComputerChoice()
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-console.log(getComputerChoice());
+// User inputs rock, paper, or scissors
+function playRound(playerSelection, computerSelection)
+{
+    
+}
+
 
     // If none of the 3 chosen, prompt to pick again
-// Computer randomly choses rock, paper, or scissors
 // Results
     // If win, state "winner"
     // If lose, state "loser"
