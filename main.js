@@ -1,7 +1,4 @@
-// No user interface for now.  Just in console
-// User inputs ROCK, PAPER, or SCISSORS.  Computer randomly chooses ROCK, PAPER, or SCISSORS.
-// Output is either "win", "lose", or "draw"
-// Win, lose, and draw conditions based on ROCK, PAPER, SCISSORS rules
+// NOTES: You may need to get rid of some console.log statements, depending on what you want your results to be.
 
 // Variable declarations
 let playerScore = 0;
@@ -93,6 +90,7 @@ function playRound(playerSelection, computerSelection)
     }
 }
 
+// Function that loops through the entire match
 function game() {
     for (let i = 0; i < getNumberOfRounds; i++)
     {
