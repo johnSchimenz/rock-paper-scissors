@@ -8,13 +8,19 @@
 
 function getPlayerChoice()
 {
-    let playerChoice = prompt("Do you have what it takes to win against the computer?!?!  Type in ROCK, PAPER, or SCISSORS!");
-    playerChoice = playerChoice.trim();
-    playerChoice = playerChoice.toLowerCase();
-    let uppercaseFirstLetter = playerChoice.slice(0, 1);
-    uppercaseFirstLetter = uppercaseFirstLetter.toUpperCase();
-    playerChoice = playerChoice.replace(playerChoice.charAt(0), uppercaseFirstLetter);
-    console.log(`Player chooses ${playerChoice}`);
+    let dataValidation = 0;
+    let playerChoice = "default";
+    do
+    {
+        playerChoice = prompt("Do you have what it takes to win against the computer?!?!  Type in ROCK, PAPER, or SCISSORS!");
+        playerChoice = playerChoice.trim();
+        playerChoice = playerChoice.toLowerCase();
+        let uppercaseFirstLetter = playerChoice.slice(0, 1);
+        uppercaseFirstLetter = uppercaseFirstLetter.toUpperCase();
+        playerChoice = playerChoice.replace(playerChoice.charAt(0), uppercaseFirstLetter);
+        console.log(`Player chooses ${playerChoice}`);
+    }
+    while (playerChoice !== "Rock" && playerChoice !== "Paper" && playerChoice !== "Scissors");
     return playerChoice;
 }
 
