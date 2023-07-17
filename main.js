@@ -3,10 +3,19 @@
 // Output is either "win", "lose", or "draw"
 // Win, lose, and draw conditions based on ROCK, PAPER, SCISSORS rules
 
-// Global variables
+// Variable declarations
 let playerScore = 0;
 let computerScore = 0;
+let tieScore = 0;
 let round = 0;
+let getNumberOfRounds = 0;
+
+// Choose number of rounds
+do
+{
+    getNumberOfRounds = prompt("Number of rounds.  Type in an integer");
+}
+while (getNumberOfRounds <= 0);
 
 // Player chooses ROCK, PAPER or SCISSORS
 function getPlayerChoice()
@@ -14,7 +23,7 @@ function getPlayerChoice()
     let playerChoice = "default";
     do
     {
-        playerChoice = prompt("Do you have what it takes to win against the computer?!?!  Type in ROCK, PAPER, or SCISSORS!");
+        playerChoice = prompt("Do you have what it takes to win against the computer?!?!  Type in ROCK, PAPER, or SCISSORS:");
         playerChoice = playerChoice.trim();
         playerChoice = playerChoice.toUpperCase();
         console.log(`You choose ${playerChoice}`);
@@ -56,20 +65,26 @@ function playRound(playerSelection, computerSelection)
     // Result 1: You win
     if ((playerSelection === "ROCK" && computerSelection === "SCISSORS") || (playerSelection === "PAPER" && computerSelection === "ROCK") || (playerSelection === "SCISSORS" && computerSelection === "PAPER"))
     {
-        return `You win!  ${playerSelection} beats ${computerSelection}`;
+        console.log(`You win the round!  ${playerSelection} beats ${computerSelection}`);
+        playerScore++;
+        return "win";
     }
 
     // Result 2: You lose
     else if ((playerSelection === "ROCK" && computerSelection === "PAPER") || (playerSelection === "PAPER" && computerSelection === "SCISSORS") || (playerSelection === "SCISSORS" && computerSelection === "ROCK"))
     {
-        return `You lose!  ${computerSelection} beats ${playerSelection}`;
+        console.log(`You lose the round!  ${computerSelection} beats ${playerSelection}`);
+        computerScore++;
+        return "loss";
 
     }
 
     // Result 3: You tie
     else if (playerSelection === computerSelection)
     {
-        return `You tie!`;
+        console.log(`You tie the round!`);
+        tieScore++;
+        return "tie";
     }
     // Result 4: Invalid entry
     else 
@@ -79,17 +94,33 @@ function playRound(playerSelection, computerSelection)
 }
 
 function game() {
-    round++;
-    console.log(round);
-    console.log()
+    for (let i = 0; i < getNumberOfRounds; i++)
+    {
+        round++;
+        console.log(`ROUND ${round} - Your score: ${playerScore} vs. Computer score: ${computerScore}`);
 
-    playRound(getPlayerChoice(), getComputerChoice());
+        playRound(getPlayerChoice(), getComputerChoice());
+    }
 
-    if ()
+    if (playerScore > computerScore)
+    {
+        return `You win the match ${playerScore} to ${computerScore} with ${tieScore} ties!`;
+    }
 
+    else if (playerScore < computerScore)
+    {
+        return `You lose the match ${playerScore} to ${computerScore} with ${tieScore} ties.`;
+    }
 
+    else if (playerScore === computerScore)
+    {
+        return `No one wins, as the score is ${playerScore} to ${computerScore} with ${tieScore} ties.`;
+    }
 
+    else
+    {
+        return `Something went wrong.  Check your functions`;
+    }
+}
 
-};
-
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
+console.log(game());
