@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <title>Rock_Paper_Scissors</title>
 </head>
 <body>
-    
+    <div class="scoreboard title">Player Score: </div>
+    <div id="playerScore" class="scoreboard value">0</div>    
+    <div class="scoreboard title">Start of Round: </div>
+    <div id="round" class="scoreboard value">0</div>
+    <div class="scoreboard title">Computer Score: </div>
+    <div id="computerScore" class="scoreboard value">0</div>
+
+    <button id="rock" onclick="getPlayerChoice(this)">ROCK</button>
+    <button id="paper" onclick="getPlayerChoice(this)">PAPER</button>
+    <button id="scissors" onclick="getPlayerChoice(this)">SCISSORS</button>
+
+    <div id="statement">Make your move</div>
 </body>
 </html>

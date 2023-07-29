@@ -1,35 +1,34 @@
 // NOTES: You may need to get rid of some console.log statements, depending on what you want your results to be.
 
-// Variable declarations
+// Variable declarations - DONE
 let playerScore = 0;
 let computerScore = 0;
-let tieScore = 0;
 let round = 0;
 let getNumberOfRounds = 0;
+let playerChoice = "playerDefault";
+let computerChoice = "computerDefault";
 
-// Choose number of rounds
+// Choose number of rounds - DONE
 do
 {
-    getNumberOfRounds = prompt("Number of rounds.  Type in an integer");
+    getNumberOfRounds = Math.round(prompt("Number of rounds.  Type in an integer"));
 }
 while (getNumberOfRounds <= 0);
 
-// Player chooses ROCK, PAPER or SCISSORS
-function getPlayerChoice()
+// Player chooses ROCK, PAPER or SCISSORS - DONE
+function getPlayerChoice(btn)
 {
-    let playerChoice = "default";
-    do
-    {
-        playerChoice = prompt("Do you have what it takes to win against the computer?!?!  Type in ROCK, PAPER, or SCISSORS:");
-        playerChoice = playerChoice.trim();
-        playerChoice = playerChoice.toUpperCase();
-        console.log(`You choose ${playerChoice}`);
-    }
-    while (playerChoice !== "ROCK" && playerChoice !== "PAPER" && playerChoice !== "SCISSORS");
+    playerChoice = btn.getAttribute("id");
+    playerChoice = playerChoice.toUpperCase();
+
+    getComputerChoice();
+
+    playRound(playerChoice, computerChoice);
+
     return playerChoice;
 }
 
-// Computer randomly chooses ROCK, PAPER, or SCISSORS
+// Computer randomly chooses ROCK, PAPER, or SCISSORS - DONE
 function getComputerChoice()
 {
     const min = 0;
@@ -38,40 +37,52 @@ function getComputerChoice()
 
     if (computerRandomNumber === 0)
     {
-        console.log(`Computer chooses ROCK`);
-        return "ROCK";
+        return computerChoice = "ROCK";
     }
     else if (computerRandomNumber === 1)
     {
-        console.log(`Computer chooses PAPER`);
-        return "PAPER";
+        return computerChoice = "PAPER";
     }
     else if (computerRandomNumber === 2)
     {
-        console.log(`Computer chooses SCISSORS`);
-        return "SCISSORS";
-    }
-    else{
-        return "ERROR!!! Check on getComputerChoice function";
+        return computerChoice = "SCISSORS";
     }
 }
 
-// User inputs ROCK, PAPER, or SCISSORS
+// One round of ROCK, PAPER, SCISSORS is played - DONE
 function playRound(playerSelection, computerSelection)
 {
     // Result 1: You win
     if ((playerSelection === "ROCK" && computerSelection === "SCISSORS") || (playerSelection === "PAPER" && computerSelection === "ROCK") || (playerSelection === "SCISSORS" && computerSelection === "PAPER"))
     {
-        console.log(`You win the round!  ${playerSelection} beats ${computerSelection}`);
+        round++;
+        let roundValue = document.querySelector("#round");
+        roundValue.innerText = round;
+        
         playerScore++;
+
+        let playerValue = document.querySelector("#playerScore");
+        playerValue.innerText = playerScore;
+
+        checkFinalResult();
+
         return "win";
     }
 
     // Result 2: You lose
     else if ((playerSelection === "ROCK" && computerSelection === "PAPER") || (playerSelection === "PAPER" && computerSelection === "SCISSORS") || (playerSelection === "SCISSORS" && computerSelection === "ROCK"))
     {
-        console.log(`You lose the round!  ${computerSelection} beats ${playerSelection}`);
+        round++;
+        let roundValue = document.querySelector("#round");
+        roundValue.innerText = round;
+        
         computerScore++;
+
+        let computerValue = document.querySelector("#computerScore");
+        computerValue.innerText = computerScore;
+
+        checkFinalResult();
+
         return "loss";
 
     }
@@ -79,40 +90,74 @@ function playRound(playerSelection, computerSelection)
     // Result 3: You tie
     else if (playerSelection === computerSelection)
     {
-        console.log(`You tie the round!`);
-        tieScore++;
+        round++;
+        let roundValue = document.querySelector("#round");
+        roundValue.innerText = round;
+        
+        checkFinalResult();
+
         return "tie";
     }
     // Result 4: Invalid entry
     else 
     {
-        return `Try again.  ${playerSelection} is not a valid choice.  You must choose either ROCK, PAPER, or SCISSORS.`
+        return `Try again.  ${playerSelection} is not a valid choice.  You must choose either ROCK, PAPER, or SCISSORS.`;
     }
 }
 
+function checkFinalResult()
+{
+    if (round === getNumberOfRounds)
+    {
+        let statementValue = document.querySelector("#statement");
+
+        if (playerScore > computerScore)
+        {
+            let blurb = `You win the match ${playerScore} to ${computerScore}!`;
+            statementValue.innerText = blurb;
+        }
+
+        else if (playerScore < computerScore)
+        {
+            let blurb = `You lose the match ${playerScore} to ${computerScore}.`;
+            statementValue.innerText = blurb;
+        }
+
+        else if (playerScore === computerScore)
+        {
+            let blurb = `No one wins, as the score is ${playerScore} to ${computerScore}.`;
+            statementValue.innerText = blurb;
+        }
+    }
+}
+
+
+/*
 // Function that loops through the entire match
 function game() {
     for (let i = 0; i < getNumberOfRounds; i++)
     {
         round++;
-        console.log(`ROUND ${round} - Your score: ${playerScore} vs. Computer score: ${computerScore}`);
-
-        playRound(getPlayerChoice(), getComputerChoice());
+        let roundValue = document.querySelector("#round");
+        roundValue.innerText = round;
+        
     }
 
     if (playerScore > computerScore)
     {
-        return `You win the match ${playerScore} to ${computerScore} with ${tieScore} ties!`;
+        playerScore++;
+        return `You win the match ${playerScore} to ${computerScore}!`;
     }
 
     else if (playerScore < computerScore)
     {
-        return `You lose the match ${playerScore} to ${computerScore} with ${tieScore} ties.`;
+        computerScore++;
+        return `You lose the match ${playerScore} to ${computerScore}.`;
     }
 
     else if (playerScore === computerScore)
     {
-        return `No one wins, as the score is ${playerScore} to ${computerScore} with ${tieScore} ties.`;
+        return `No one wins, as the score is ${playerScore} to ${computerScore}.`;
     }
 
     else
@@ -120,5 +165,4 @@ function game() {
         return `Something went wrong.  Check your functions`;
     }
 }
-
-console.log(game());
+*/
